@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from api.views import RandomForestClassifierEndpoint, ADABoostClassifierEndpoint, DecisionTreeClassifierEndpoint, GradientBoostClassifierEndpoint
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("random_forest_classifier", RandomForestClassifierEndpoint.as_view()),
+    path("ada_boost_classifier", ADABoostClassifierEndpoint.as_view()),
+    path("gradient_boost_classifier", GradientBoostClassifierEndpoint.as_view()),
+    path("decision_tree_classifier", DecisionTreeClassifierEndpoint.as_view()),
 ]

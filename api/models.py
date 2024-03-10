@@ -3,10 +3,10 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    username = models.CharField(50, unique=True)
+    username = models.CharField(max_length=50, unique=True)
 
 class RandomForestClassifier(models.Model):
-    name = models.ForeignKey('User', on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, unique=True)
     max_depth = models.IntegerField(default=5)
     criterion = models.CharField(max_length=50, default='gini')
 
@@ -14,7 +14,7 @@ class RandomForestClassifier(models.Model):
         return "RCla"
 
 class GradientBoostClassifier(models.Model):
-    name = models.ForeignKey('User', on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, unique=True)
     loss = models.CharField(max_length=50, default='log_loss')
     n_estimators = models.IntegerField(default=50)
     learning_rate = models.FloatField(default=1)
@@ -23,7 +23,7 @@ class GradientBoostClassifier(models.Model):
         return "GBoostCla"
 
 class AdaBoostClassifier(models.Model):
-    name = models.ForeignKey('User', on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, unique=True)
     n_estimators = models.IntegerField(default=50)
     learning_rate = models.FloatField(default=1)
 
@@ -31,7 +31,7 @@ class AdaBoostClassifier(models.Model):
         return "ABoostCla"
 
 class DecisionTreeClassifier(models.Model):
-    name = models.ForeignKey('User', on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, unique=True)
     max_depth = models.IntegerField(default=5)
     criterion = models.CharField(max_length=50, default='gini')
 
