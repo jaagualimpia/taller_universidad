@@ -2,3 +2,4 @@
 *.pyc
 /images
 *.sqlite3
+*.csv
