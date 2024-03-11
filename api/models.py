@@ -39,5 +39,6 @@ class DecisionTreeClassifier(models.Model):
         return "DTreeCla"
 
 class ClassificationResults(models.Model):
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    username = models.CharField(max_length=50, unique=True)
     score = models.FloatField(default=0)
+    algorithm = models.CharField(max_length=50, default='Unknown') 
