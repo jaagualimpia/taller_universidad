@@ -15,30 +15,27 @@ class InferenceService:
         self.y_test = np.array(self.__test_images.iloc[:, 0])
         self.x_test = np.array(self.__test_images.iloc[:, 1:])
 
-
-    def predict(self, data: list[str]) -> list[str]:
-        return self.model.predict(data)
     
     def predict_random_forest(self, data: list[str]) -> list[str]:
         self.model = RandomForestClassifier()
-        self.model.fit(self.x_train, self.y_train)
+        self.model.fit(self.x_train[2500], self.y_train[2500])
 
         return self.model.predict(data)
     
     def predict_decision_tree(self, data: list[str]) -> list[str]:
         self.model = DecisionTreeClassifier()
-        self.model.fit(self.x_train, self.y_train)
+        self.model.fit(self.x_train[2500], self.y_train[2500])
 
         return self.model.predict(data)
     
     def predict_adaboost(self, data: list[str]) -> list[str]:
         self.model = AdaBoostClassifier()
-        self.model.fit(self.x_train, self.y_train)
+        self.model.fit(self.x_train[2500], self.y_train[2500])
 
         return self.model.predict(data)
     
     def predict_gradient_boosting(self, data: list[str]) -> list[str]:
         self.model = GradientBoostingClassifier()
-        self.model.fit(self.x_train, self.y_train)
+        self.model.fit(self.x_train[1000], self.y_train[1000])
 
         return self.model.predict(data)
