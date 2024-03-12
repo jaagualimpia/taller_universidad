@@ -99,7 +99,7 @@ class ADABoostClassifierEndpoint(APIView):
 
         if ada_boost.is_valid():
 
-            score = inference_service.get_gradient_boosting_accuracy(
+            score = inference_service.get_adaboost_accuracy(
                 learning_rate = ada_boost.validated_data['learning_rate'],
                 n_estimators = ada_boost.validated_data['n_estimators'],
                 username = ada_boost.validated_data['username']

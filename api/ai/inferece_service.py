@@ -47,9 +47,9 @@ class InferenceService:
 
         return self.__calculate_accuracy()
     
-    def get_adaboost_accuracy(self, n_stimtators: int, learning_rate: float, username: str) -> list[str]:
+    def get_adaboost_accuracy(self, n_estimators: int, learning_rate: float, username: str) -> list[str]:
         self.model = AdaBoostClassifier(
-            n_estimators=n_stimtators,
+            n_estimators=n_estimators,
             learning_rate=learning_rate
         )
         self.model.fit(self.x_train[:2500], self.y_train[:2500])
