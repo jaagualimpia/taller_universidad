@@ -3,8 +3,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .ai.inferece_service import InferenceService
-from .serializers import ClassificationResultsSerializer, RandomForestSerializer, DecisionTreeSerializer, GradientBoostSerializer, AdaBoostSerializer
+from .serializers import ClassificationResultsSerializer, RandomForestSerializer, DecisionTreeSerializer, GradientBoostSerializer, AdaBoostSerializer, SpecificModelPredictionSerializer
 from .models import ClassificationResults
+
 
 inference_service = InferenceService()
 
@@ -20,7 +21,8 @@ class RandomForestClassifierEndpoint(APIView):
 
             score = inference_service.get_random_forest_accuracy(
                 max_depth = random_fc.validated_data['max_depth'],
-                criterion = random_fc.validated_data['criterion']
+                criterion = random_fc.validated_data['criterion'],
+                username = random_fc.validated_data['username']
             )
 
             ClassificationResults.objects.create(
@@ -30,7 +32,6 @@ class RandomForestClassifierEndpoint(APIView):
             ).save()
 
             random_fc.save()
-
             return Response(random_fc.data)
 
         return Response(random_fc.errors)
@@ -46,7 +47,8 @@ class DecisionTreeClassifierEndpoint(APIView):
 
             score = inference_service.get_decision_tree_accuracy(
                 max_depth = decision_tree.validated_data['max_depth'],
-                criterion = decision_tree.validated_data['criterion']
+                criterion = decision_tree.validated_data['criterion'],
+                username = decision_tree.validated_data['username']
             )
 
             ClassificationResults.objects.create(
@@ -73,7 +75,8 @@ class GradientBoostClassifierEndpoint(APIView):
             score = inference_service.get_gradient_boosting_accuracy(
                 loss = gradient_boost.validated_data['loss'],
                 learning_rate = gradient_boost.validated_data['learning_rate'],
-                n_estimators = gradient_boost.validated_data['n_estimators']
+                n_estimators = gradient_boost.validated_data['n_estimators'],
+                username = gradient_boost.validated_data['username']
             )
 
             ClassificationResults.objects.create(
@@ -98,7 +101,8 @@ class ADABoostClassifierEndpoint(APIView):
 
             score = inference_service.get_gradient_boosting_accuracy(
                 learning_rate = ada_boost.validated_data['learning_rate'],
-                n_estimators = ada_boost.validated_data['n_estimators']
+                n_estimators = ada_boost.validated_data['n_estimators'],
+                username = ada_boost.validated_data['username']
             )
 
             ClassificationResults.objects.create(
@@ -119,3 +123,12 @@ class ClassificationResultsEndpoint(APIView):
         clas_results = ClassificationResultsSerializer(instance=results, many=True)
         
         return Response(clas_results.data)
+    
+class SpecificModelPredictionEndpoint(APIView):
+    def post(self, request):
+        prediction = inference_service.retreive_model(request.data['username'],
+                                            request.data['algorithm'],
+                                            request.data['image_tensor'])
+            
+        return Response(prediction)
+
