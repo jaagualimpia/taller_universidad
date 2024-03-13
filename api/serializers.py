@@ -28,7 +28,7 @@ class GradientBoostSerializer(serializers.ModelSerializer):
 class ClassificationResultsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassificationResults
-        fields = ["username", "algorithm", "score"]
+        fields = ["id", "username", "algorithm", "score"]
 
 class SpecificModelPredictionSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=50)
