@@ -107,7 +107,7 @@ class ADABoostClassifierEndpoint(APIView):
 
             ClassificationResults.objects.create(
                 username = ada_boost.validated_data['username'],
-                algorithm = "Extreme Gradient Boosting",
+                algorithm = "Ada boost",
                 score = score
             ).save()
 
