@@ -65,7 +65,7 @@ class InferenceService:
         )
         
         self.model.fit(self.x_train[:1000], self.y_train[:1000])
-        joblib.dump(self.model, os.path.join(relative_path, f'{username}-Random_Forest_model.pkl'))
+        joblib.dump(self.model, os.path.join(relative_path, f'{username}-Extreme_Gradient_Boosting_model.pkl'))
 
         return self.__calculate_accuracy()
     
