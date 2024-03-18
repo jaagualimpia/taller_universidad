@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  backend:
+    container_name: app
+    image: jaagualimpiac/backend_taller_universidad:latest
+    restart: always
+    ports:
+      - "5050:8080"
+  frontend:
+    container_name: frontend
+    image: jaagualimpiac/taller_universidad:latest
+    restart: always
+    env_file:
+      - .env.local
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
